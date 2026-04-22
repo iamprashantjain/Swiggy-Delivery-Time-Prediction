@@ -1,0 +1,16 @@
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+xgboost
+pyyaml
+ipykernel
+dvc[s3]
+plotly
+mlflow==2.15.0
+dagshub
+fastapi
+uvicorn[standard]
+pydantic
+joblib

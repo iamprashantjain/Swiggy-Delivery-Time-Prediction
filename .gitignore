@@ -1,0 +1,89 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.env/
+.venv/
+env/
+
+# =========================
+# Jupyter Notebooks
+# =========================
+.ipynb_checkpoints
+
+# =========================
+# Logs & Debug
+# =========================
+*.log
+logs/
+
+# =========================
+# Data (VERY IMPORTANT)
+# =========================
+data/
+*.csv
+*.xlsx
+*.json
+*.parquet
+
+# If you want to keep sample data:
+!data/sample/
+
+# =========================
+# Models & Artifacts
+# =========================
+*.pkl
+*.joblib
+*.h5
+*.model
+models/
+artifacts/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Build / Distribution
+# =========================
+build/
+dist/
+*.egg-info/
+
+# =========================
+# Testing
+# =========================
+.coverage
+htmlcov/
+.pytest_cache/
+
+# =========================
+# ML Experiments
+# =========================
+mlruns/        # MLflow
+wandb/         # Weights & Biases
+
+# =========================
+# Misc
+# =========================
+*.sqlite3
+*.db
