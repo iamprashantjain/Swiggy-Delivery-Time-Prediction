@@ -15,7 +15,7 @@ def get_requirements(file_path: str) -> List[str]:
     return requirements
 
 setup(
-    name='Ola Bike Demand Forecasting',
+    name='Swiggy delivery time prediction',
     version='0.0.1',
     author='Prashant Jain',
     author_email='p@p.com',
