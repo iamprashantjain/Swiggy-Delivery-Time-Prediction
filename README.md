@@ -94,4 +94,22 @@
 
 
 13. Enhance CICD Pipeline
-    - Deploy Latest docker image to EC2 with CodeDeploy or ECS or Kubernetes
+    - For the deployment, Chose any 1 from below based on use case:
+
+    ![alt text](image.png)
+
+
+14. Monitoring and Retraining Pipeline
+    - **Why**
+        - Models degrade over time due to:
+        - Data drift (changing delivery patterns)
+        - Concept drift (new traffic rules, weather patterns)
+        - Feature drift (new restaurants, rider behavior)
+
+    - **Solution**
+        - Continuous monitoring + automated retraining
+        - Production Monitoring with **Prometheus & Grafana**
+        - Send Notifications on Slack
+
+
+
