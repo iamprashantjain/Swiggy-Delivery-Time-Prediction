@@ -40,6 +40,7 @@ list_of_files = [
     ".env",
     "README.md",
     "requirements.txt",
+    ".env"
     
     "app/main.py",
     "app/test_api.py",

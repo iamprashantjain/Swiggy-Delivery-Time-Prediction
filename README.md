@@ -42,17 +42,6 @@
     - Create setup.py and pip install -e .
 
 
-    - Setup s3 buket & aws ecr for docker app
-        - create iam user
-        - attach policies
-        - setup aws: pip install awscli && aws configure (access key and security key)
-
-
-    - dvc remote add -d myremote s3://my-mlops-project-demo/house_price_prediction
-    - dvc config core.autostage true ---> auto pull everytime
-    - Setup dagshub and host mlflow 
-
-
 5. Data Gathering
 
 6. Data Assesment
@@ -63,10 +52,21 @@
 
 6. Data Transformation & Feature Engineering
 
+
++ **Setup Below before moving to step 7**
++ dvc remote add -d myremote s3://my-mlops-project-demo/house_price_prediction
++ dvc config core.autostage true ---> auto pull everytime
++ Setup dagshub and host mlflow 
+
+
 7. Model Training
     1. Baseline model
     2. Best Algorithm
     3. Hyper-parameter Tunining
+
+
++ **Setup Below before moving to step 8**
+    1. S3 bucket for data versioning
 
 
 8. Convert best overall into dvc pipeline: create components like data_ingestion, data_transformation, model_trainer, model_evalutaion, logger etc
@@ -77,4 +77,21 @@
 
 11. Create fastapi (fetch latest model in production from mlflow model_registry and make predictions)
 
-12. Create CICD Pipeline
++ **Setup Below before moving to step 12**
+    1. aws ecr for docker app
+    2. create iam user
+    3. attach policies
+    4. setup aws: pip install awscli && aws configure (access key and security key)
+
+
+12. Create CICD Pipeline which will do the following: 
+    - To run dvc pipeline **on push**
+    - Evaluate model
+    - Upload best model on dagshub hosted mlflow model registry
+    - Perform model and promote model to production
+    - Dockerize fastapi which uses latest model in production
+    - Push docker image to ECR
+
+
+13. Enhance CICD Pipeline
+    - Deploy Latest docker image to EC2 with CodeDeploy or ECS or Kubernetes
