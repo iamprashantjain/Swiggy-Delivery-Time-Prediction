@@ -43,19 +43,27 @@
 
 
 5. Data Gathering
+    - Webscrape data
+    - Buy/Source Data
 
 6. Data Assesment
+    - Asses the data to understand what are the flaws
 
 7. Data Cleaning
+    - fix the flaws in data
 
 5. EDA
+    - Eplore data to understand relation b/w features
+    - Understand what columns are important in predictions
+    - Feature Engineering
+    - Understand what needs to be transformed based on algorithms
 
-6. Data Transformation & Feature Engineering
-
+6. Data Transformation, Feature Selection & Feature Engineering
+    - Create additional columns by extracting information from the columns which could be more useful in predictions
+    - perform transformations like Normalizing, Encoding etc
+    - select best features to be used for predictions 
 
 + **Setup Below before moving to step 7**
-+ dvc remote add -d myremote s3://my-mlops-project-demo/house_price_prediction
-+ dvc config core.autostage true ---> auto pull everytime
 + Setup dagshub and host mlflow 
 
 
@@ -67,7 +75,8 @@
 
 + **Setup Below before moving to step 8**
     1. S3 bucket for data versioning
-
+    2. dvc remote add -d myremote s3://my-mlops-project-demo/house_price_prediction
+    
 
 8. Convert best overall into dvc pipeline: create components like data_ingestion, data_transformation, model_trainer, model_evalutaion, logger etc
 

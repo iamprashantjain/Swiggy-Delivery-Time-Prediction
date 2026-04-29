@@ -1,0 +1,4 @@
+# Data paths - Swiggy Delivery Project
+data:
+  raw_data_path: "data/swiggy.csv"
+  cleaned_data_path: "data/raw_data.xlsx"

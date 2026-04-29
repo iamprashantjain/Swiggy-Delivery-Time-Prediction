@@ -582,44 +582,45 @@ def bivariate_analysis(df, num_col, cat_col, target_col):
 
 
 
-# ============================================
-# QUICK INSIGHTS FUNCTION (Optional)
-# ============================================
-
-def quick_insights(df, num_col, cat_col, target_col):
-    """
-    Quick summary of most important features affecting target
-    """
-    print("\n" + "="*80)
-    print("🚀 QUICK INSIGHTS: TOP FEATURES AFFECTING TARGET")
-    print("="*80)
+def quick_multivariate_eda(df, num_cols, cat_cols, target_col):
+    """Quick and simple multivariate analysis"""
     
-    # Numerical features correlation
-    print("\n📈 TOP NUMERICAL FEATURES (by correlation):")
-    correlations = []
-    for col in num_col:
-        if col != target_col:
-            corr = df[[col, target_col]].corr().iloc[0, 1]
-            correlations.append((col, abs(corr), corr))
+    print(f"\n{'='*50}")
+    print(f"Multivariate EDA - Target: {target_col}")
+    print(f"{'='*50}")
     
-    correlations.sort(key=lambda x: x[1], reverse=True)
-    for i, (col, abs_corr, corr) in enumerate(correlations[:5], 1):
-        direction = "↑" if corr > 0 else "↓"
-        print(f"   {i}. {col}: {corr:.4f} {direction}")
+    # Numerical features
+    if num_cols:
+        print("\n📈 Numerical Feature Correlations:")
+        corr_data = {}
+        for col in num_cols:
+            if col in df.columns:
+                corr = df[col].corr(df[target_col])
+                corr_data[col] = corr
+                print(f"  {col:20s}: {corr:+.3f}")
+        
+        # Plot
+        fig, axes = plt.subplots(1, min(3, len(num_cols)), figsize=(15, 4))
+        if len(num_cols) == 1:
+            axes = [axes]
+        
+        for i, col in enumerate(list(corr_data.keys())[:3]):
+            axes[i].scatter(df[col], df[target_col], alpha=0.5)
+            axes[i].set_xlabel(col)
+            axes[i].set_ylabel(target_col)
+            axes[i].set_title(f'Corr: {corr_data[col]:.3f}')
+        
+        plt.tight_layout()
+        plt.show()
     
-    # Categorical features ANOVA
-    print("\n📊 TOP CATEGORICAL FEATURES (by statistical significance):")
-    from scipy.stats import f_oneway
+    # Categorical features
+    if cat_cols:
+        print("\n📊 Categorical Feature Impact:")
+        for col in cat_cols[:3]:
+            if col in df.columns:
+                print(f"\n  → {col}:")
+                means = df.groupby(col)[target_col].mean().sort_values(ascending=False)
+                for cat, val in means.head(3).items():
+                    print(f"      {cat}: {val:.2f}")
     
-    cat_importance = []
-    for col in cat_col:
-        groups = [df[df[col] == cat][target_col].dropna().values for cat in df[col].unique()]
-        if len(groups) > 1:
-            f_stat, p_val = f_oneway(*groups)
-            cat_importance.append((col, f_stat, p_val))
-    
-    cat_importance.sort(key=lambda x: x[1], reverse=True)
-    for i, (col, f_stat, p_val) in enumerate(cat_importance[:5], 1):
-        significant = "✅" if p_val < 0.05 else "❌"
-        print(f"   {i}. {col}: F-stat={f_stat:.2f}, p={p_val:.4f} {significant}")
-
+    print("\n✅ Analysis complete!")
